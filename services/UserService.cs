@@ -26,7 +26,7 @@ namespace WebDeportivo.Services
         {
             // 1. Buscar al usuario por nombre de usuario o email
             var user = _context.Usuarios
-                .FirstOrDefault(u => u.Username == username || u.Email == username);
+                .FirstOrDefault(u => u.UsNombre == username || u.UsEmail == username);
 
             if (user == null)
             {
@@ -35,7 +35,7 @@ namespace WebDeportivo.Services
 
             // 2. Simulación de verificación de contraseña
             // En un proyecto real, se usaría PasswordHasher.VerifyHashedPassword()
-            if (user.PasswordHash == "password_hash_ejemplo" && password == "123456")
+            if (user.UsPasswordHash == "password_hash_ejemplo" && password == "123456")
             {
                 return user; // Credenciales válidas
             }

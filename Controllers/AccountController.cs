@@ -1,105 +1,83 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// ... (asegúrate de tener estos usings)
+using Microsoft.AspNetCore.Mvc;
 using WebDeportivo.Models;
-using WebDeportivo.ViewModels;
-using WebDeportivo.Interfaces; // <<-- Agregamos la interfaz
-using BCrypt.Net; // <<-- Agregamos Bcrypt
+using WebDeportivo.Models.ViewModels; // Cambiamos el using
+using WebDeportivo.Interfaces;
+using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 using WebDeportivo.Data;
-using WebDeportivo.Models.ViewModels; // <<-- Asegúrate de tener tu DbContext
+using System; // Para DateTime
+using System.Threading.Tasks; // Para Task
 
 namespace WebDeportivo.Controllers
 {
     public class AccountController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IEmailService _emailService; // <<-- Usamos la INTERFAZ
+        private readonly IEmailService _emailService;
 
-        // Pedimos el contexto Y el servicio de email
         public AccountController(AppDbContext context, IEmailService emailService)
         {
             _context = context;
             _emailService = emailService;
         }
 
-        // ... (Tu vista de Login GET) ...
+        // ... (Tus metodos Login, Recuperar, etc. se quedan igual por ahora) ...
+        // ... (Tu metodo Registrar GET) ...
 
-        // LOGIN CON BCRYPT
+        // MODIFICAMOS EL REGISTRO
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Registrar(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var usuario = await _context.Usuarios
-                    .FirstOrDefaultAsync(u => u.Email == model.EMail);
-
-                // Aca comparamos la clave del form con el HASH guardado
-                if (usuario != null && BCrypt.Net.BCrypt.Verify(model.Password, usuario.PasswordHash))
+                // 1. Verificamos si el email ya existe
+                if (await _context.Usuarios.AnyAsync(u => u.UsEmail == model.Email))
                 {
-                    // (Logica de sesion / cookie)
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError(string.Empty, "El email ya está en uso.");
+                    return View(model);
                 }
 
-                ModelState.AddModelError(string.Empty, "Usuario o clave incorrectos");
-            }
-            return View(model);
-        }
+                // --- Asignación de Rol por Defecto ---
+                // Buscamos el rol "Pendiente"
+                var rolPorDefecto = await _context.Roles
+                    .FirstOrDefaultAsync(r => r.RoNombre == "Pendiente");
 
-        // REGISTRO (Para guardar con Hash)
-        [HttpPost]
-        public async Task<IActionResult> Registrar(Usuario usuario) // Asumo que tienes un ViewModel para registrar
-        {
-            if (ModelState.IsValid)
-            {
-                // Aca "hasheamos" la clave antes de guardarla
-                usuario.PasswordHash = BCrypt.Net.BCrypt.HashPassword(usuario.PasswordHash);
+                // Si no existe (la primera vez que corre), lo creamos rapido
+                if (rolPorDefecto == null)
+                {
+                    rolPorDefecto = new Rol { RoNombre = "Pendiente" };
+                    _context.Roles.Add(rolPorDefecto);
+                    // Guardamos solo para asegurarnos que el rol exista
+                    await _context.SaveChangesAsync();
+                }
+                // --- Fin Asignación de Rol ---
 
+
+                // 2. Creamos el nuevo usuario con los campos reformulados
+                var usuario = new Usuario
+                {
+                    UsNombre = model.Nombre,
+                    UsApellido = model.Apellido, // El nuevo campo
+                    UsEmail = model.Email,
+                    UsPasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password), // Hasheamos
+                    UsFechaRegistro = DateTime.Now, // Ponemos la fecha de hoy
+                    UsActivo = true, // Lo activamos por defecto
+                    RoId = rolPorDefecto.RoId // ¡Asignamos el ID del rol "Pendiente"!
+                };
+
+                // 3. Guardamos el usuario nuevo
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
+
+                // (Opcional: enviar email de bienvenida)
+                // await _emailService.EnviarEmailAsync(usuario.UsEmail, "Bienvenido", "Gracias por registrarte");
+
                 return RedirectToAction("Login");
             }
-            return View(usuario);
-        }
 
-        // --- RECUPERACION DE CLAVE ---
-
-        // Muestra la vista para pedir el email
-        public IActionResult Recuperar()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Recuperar(RecuperarPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model); // Si el email esta mal, volvemos
-            }
-
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == model.Email);
-
-            if (usuario != null)
-            {
-                // 1. Creamos una clave temporal
-                string nuevaClave = Guid.NewGuid().ToString().Substring(0, 8);
-
-                // 2. Hasheamos la nueva clave y la guardamos en la BD
-                usuario.PasswordHash = BCrypt.Net.BCrypt.HashPassword(nuevaClave);
-                await _context.SaveChangesAsync();
-
-                // 3. Enviamos el email
-                string cuerpo = $"Hola {usuario.Username}, tu nueva contraseña temporal es: <b>{nuevaClave}</b>.";
-                await _emailService.EnviarEmailAsync(usuario.Email, "Recuperación de cuenta", cuerpo);
-
-                ViewBag.Mensaje = "¡Listo! Revisa tu correo.";
-            }
-            else
-            {
-                // Por seguridad, no decimos "el mail no existe"
-                ViewBag.Mensaje = "Si el correo está registrado, recibirás las instrucciones.";
-            }
-
-            return View();
+            // Si el modelo no es valido, volvemos a la vista
+            return View(model);
         }
     }
 }
