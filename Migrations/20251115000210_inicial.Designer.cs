@@ -11,7 +11,7 @@ using WebDeportivo.Data;
 namespace WebDeportivo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251107000736_inicial")]
+    [Migration("20251115000210_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
@@ -32,10 +32,10 @@ namespace WebDeportivo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ContrasenaHash")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

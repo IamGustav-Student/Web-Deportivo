@@ -1,9 +1,21 @@
 ﻿// Carpeta: Services
 // Archivo: IUserService.cs
 
+
+// Carpeta: Services
+// Archivo: IUserService.cs
+
+
+// Carpeta: Services
+// Archivo: IUserService.cs
+
+
+// Carpeta: Services
+// Archivo: IUserService.cs
+
 using WebDeportivo.Models;
 
-namespace WebDeportivo.Services
+namespace WebDeportivo.Interfaces
 {
     public interface IUserService
     {

@@ -1,9 +1,9 @@
 ﻿// Carpeta: ViewModels
 // Archivo: LoginViewModel.cs
 
-using System.ComponentModel.DataAnnotations; // Proporciona las anotaciones para validación
+using System.ComponentModel.DataAnnotations;
 
-namespace WebDeportivo.ViewModels
+namespace WebDeportivo.Models.ViewModels
 {
     public class LoginViewModel
     {
@@ -16,10 +16,15 @@ namespace WebDeportivo.ViewModels
         [Display(Name = "Contraseña")]
         public string? Password { get; set; } // Campo para capturar la contraseña
 
+        [EmailAddress(ErrorMessage ="Debes escribir un tipo de Email correcto")]
+        public string EMail { get; set; }
+
         [Display(Name = "Recordarme")]
         public bool RememberMe { get; set; } // Opción para persistir la cookie
 
         public string? Usuario { get; internal set; }
         public string? Contrasena { get; internal set; }
+
+        
     }
 }

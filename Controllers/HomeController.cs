@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using System; 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using WebDeportivo.Models;
-using WebDeportivo.ViewModels;
+using WebDeportivo.Models.ViewModels;
 
 namespace webdeportivo.Controllers
 {

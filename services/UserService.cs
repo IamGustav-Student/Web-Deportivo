@@ -3,6 +3,7 @@
 
 using WebDeportivo.Models;
 using WebDeportivo.Data;
+using WebDeportivo.Interfaces;
 
 namespace WebDeportivo.Services
 {
@@ -34,7 +35,7 @@ namespace WebDeportivo.Services
 
             // 2. Simulación de verificación de contraseña
             // En un proyecto real, se usaría PasswordHasher.VerifyHashedPassword()
-            if (user.ContrasenaHash == "password_hash_ejemplo" && password == "123456")
+            if (user.PasswordHash == "password_hash_ejemplo" && password == "123456")
             {
                 return user; // Credenciales válidas
             }
