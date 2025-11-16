@@ -1,35 +1,8 @@
 ﻿@{
-    // ... tu configuración de C#
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="login-container">
-    <div class="login-box">
-
-        <h2>Iniciar Sesión</h2>
-
-        <form asp-controller="Home" asp-action="Login" method="post">
-
-            <div class="form-group">
-                <label for="Usuario">Nombre de Usuario o Email</label>
-                <input type="text" id="Usuario" name="Usuario" class="form-control" required />
-            </div>
-
-            <div class="form-group">
-                <label for="Contrasena">Contraseña</label>
-                <input type="password" id="Contrasena" name="Contrasena" class="form-control" required />
-            </div>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-                <input type="checkbox" id="Recordarme" name="Recordarme" />
-                <label for="Recordarme" style="display: inline; font-weight: normal;">Recordarme</label>
-            </div>
-
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
-
-            <a href="@Url.Action("RecuperarContrasena", "Home")" class="recovery-link">
-                ¿Olvidaste tu contraseña?
-            </a>
-
-        </form>
-    </div>
+<div class="text-center">
+    <h1 class="display-4 text-warning">Bienvenido a WebDeportivo</h1>
+    <p>La mejor plataforma (en construcción) del mundo.</p>
 </div>

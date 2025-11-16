@@ -21,41 +21,64 @@ html {
 
 /* Archivo: wwwroot/css/site.css */
 
-/* 1. Fondo Neutro (Gris claro o blanco suave) */
 body {
-    background-color: #f8f9fa; /* Gris muy claro (similar a Bootstrap 'light') */
-    padding-top: 5rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía profesional */
+    background-color: #222; /* Fondo principal oscuro */
+    color: #FFC107; /* Letra amarilla (Bootstrap 'warning') */
 }
 
-/* 2. Contenedor del Formulario (Tarjeta limpia y centrada) */
-.login-container {
-    padding: 30px;
-    background-color: white; /* Fondo blanco */
-    border-radius: 10px; /* Bordes ligeramente redondeados */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil y profesional */
-    border-top: 4px solid #007bff; /* Línea de acento azul primario en la parte superior */
+/* Paneles y formularios */
+.card {
+    background-color: #333 !important; /* Fondo de las "tarjetas" */
+    border-color: #FFC107;
 }
 
-/* 3. Estilos de Input (Mejorar foco) */
-.form-control:focus {
-    border-color: #007bff; /* Borde azul de acento al hacer foco */
-    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Sombra de foco más suave */
+/* Cajas de texto y botones */
+.form-control {
+    background-color: #555;
+    color: #fff;
+    border-color: #FFC107;
 }
 
-/* 4. Botón de Envío (Usa el azul primario de Bootstrap) */
+    .form-control:focus {
+        background-color: #555;
+        color: #fff;
+        border-color: #fff;
+        box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25); /* Sombra de foco amarilla */
+    }
+
+.form-label {
+    color: #FFC107; /* Etiquetas de formulario amarillas */
+}
+
 .btn-primary {
-    background-color: #007bff; /* Azul estándar de Bootstrap */
-    border-color: #007bff;
-    transition: background-color 0.3s ease;
+    background-color: #FFC107;
+    border-color: #FFC107;
+    color: #222; /* Texto oscuro para botones amarillos */
 }
 
     .btn-primary:hover {
-        background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
-        border-color: #0056b3;
+        background-color: #ffda6a;
+        border-color: #ffda6a;
+        color: #222;
     }
 
-/* 5. Mensajes de error */
+/* Links */
+a {
+    color: #ffda6a; /* Links amarillos mas claros */
+}
+
+    a:hover {
+        color: #fff;
+    }
+
+/* Tablas (si las usamos) */
+.table {
+    color: #FFC107;
+}
+/*Footer*/
+
+
+/* Mensajes de error */
 .text-danger {
     color: #dc3545 !important;
     font-size: 0.85em;

@@ -17,7 +17,7 @@ namespace WebDeportivo.Models.ViewModels
         public string? Password { get; set; } // Campo para capturar la contraseña
 
         [EmailAddress(ErrorMessage ="Debes escribir un tipo de Email correcto")]
-        public string EMail { get; set; }
+        public string Email { get; set; }
 
         [Display(Name = "Recordarme")]
         public bool RememberMe { get; set; } // Opción para persistir la cookie

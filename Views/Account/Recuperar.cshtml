@@ -1,0 +1,39 @@
+﻿@using WebDeportivo.ViewModels
+@model RecuperarPasswordViewModel
+@{
+    ViewData["Title"] = "Recuperar Contraseña";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <h2 class="card-title text-center text-warning mb-4">@ViewData["Title"]</h2>
+                <p>Ingresa tu email y te enviaremos una contraseña temporal.</p>
+
+                @if (ViewBag.Mensaje != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Mensaje</div>
+                }
+
+                <form asp-action="Recuperar" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="email@ejemplo.com" />
+                        <label asp-for="Email" class="form-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Recuperar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,74 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Actividades Deportivas";
+    ViewData["Title"] = "Actividades";
 }
-  
-<div class="main-content">
 
-    <h1 style="text-align: center;">♂️ Nuestras Actividades Disponibles 🏆</h1>
-
-    <p style="text-align: center; font-size: 1.1rem; color: #CCCCCC; margin-bottom: 40px;">
-        Selecciona la actividad que más te interese para obtener más detalles e inscribirte.
-    </p>
-
-    <div class="actividades-list-container">
-
-        <div class="actividad-item">
-            <h2>Fútbol </h2>
-            <p>Entrenamientos tácticos y partidos semanales en cancha de césped sintético.</p>
-            <a href="#" class="leer-mas">Ver Horarios</a>
-        </div>
-
-        <div class="actividad-item">
-            <h2>Baloncesto </h2>
-            <p>Clases para principiantes y ligas competitivas. ¡Para todas las edades!</p>
-            <a href="#" class="leer-mas">Ver Horarios</a>
-        </div>
-
-        <div class="actividad-item">
-            <h2>Natación </h2>
-            <p>Cursos de natación y clases de aqua-gym en nuestra piscina climatizada.</p>
-            <a href="#" class="leer-mas">Ver Horarios</a>
-        </div>
-
-        <div class="actividad-item">
-            <h2>Gimnasio & Pesas </h2>
-            <p>Acceso libre a máquinas, pesas y entrenadores personales disponibles.</p>
-            <a href="#" class="leer-mas">Ver Horarios</a>
-        </div>
-
-    </div>
-
+<div class="text-center">
+    <h1 class="display-4 text-warning">@ViewData["Title"]</h1>
+    <p>Esta es la página secreta de actividades.</p>
+    <p>Si la ves, ¡es porque estás logueado!</p>
 </div>
-
-<style>
-    /* Estilo para el contenedor de la lista, si no lo tienes en tu CSS general */
-    .actividades-list-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        padding: 20px;
-    }
-
-    .actividad-item {
-        background-color: var(--color-secundario, #15324A); /* Usa el color del CSS propuesto */
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-        border-left: 5px solid var(--color-acento, #FF4136); /* Línea de acento */
-        transition: background-color 0.3s;
-    }
-
-    .actividad-item:hover {
-        background-color: #1a3c5a; /* Un tono un poco más claro al hacer hover */
-    }
-
-    .actividad-item h2 {
-        color: var(--color-acento, #FF4136);
-        margin-bottom: 10px;
-        font-size: 1.5rem;
-    }
-
-    .actividad-item p {
-        margin-bottom: 15px;
-    }
-</style>

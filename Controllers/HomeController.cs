@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace webdeportivo.Controllers
 {
     public class HomeController : Controller
     {
-        // VISTA INDEX (Página principal con Noticias)
+        // (Página principal con Noticias)
         public IActionResult Index()
         {
             var noticias = new List<Noticia>
@@ -56,6 +57,7 @@ namespace webdeportivo.Controllers
         // ----------------------------------------------
         // VISTA DE ACTIVIDADES (PÁGINA SIGUIENTE)
         // ----------------------------------------------
+        [Authorize] // Solo Usuarios logueados lo van  a ver
         public IActionResult Actividades()
         {
             // Enviamos la hora actual a la vista
@@ -80,6 +82,11 @@ namespace webdeportivo.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace WebDeportivo.Models
 {
     public class Usuario
     {
-        // Us para los campos de Usuario
+        [Key]
         public int UsId { get; set; } // Antes 'Id'
 
         [Required(ErrorMessage = "El nombre es obligatorio")]

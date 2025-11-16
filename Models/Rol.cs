@@ -6,6 +6,7 @@ namespace WebDeportivo.Models
     public class Rol
     {
         // Ro para los campos de Rol
+        [Key]
         public int RoId { get; set; }
 
         [Required(ErrorMessage = "El nombre del rol es obligatorio")]
