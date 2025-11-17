@@ -22,9 +22,90 @@ html {
 /* Archivo: wwwroot/css/site.css */
 
 body {
-    background-color: #222; /* Fondo principal oscuro */
+    background-image: url('../Images/sports-background.jpg'); /* ¡TU IMAGEN! */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: #FFC107; /* Letra amarilla (Bootstrap 'warning') */
+    position: relative; /* Necesario para el overlay global */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
+    /* student comment: Un overlay oscuro para TODO el body */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8); /* Capa negra translucida más fuerte */
+        z-index: -1; /* Lo ponemos debajo del contenido */
+    }
+main {
+    position: relative;
+    z-index: 0;
+    flex-grow: 1;
+}
+footer {
+    flex-shrink: 0;
+}
+
+
+.welcome-background {
+   
+    background-size: cover; /* Cubre toda el area */
+    background-position: center;
+    background-attachment: fixed; /* El fondo no se mueve con el scroll */
+    position: relative; /* Necesario para el overlay */
+    padding: 6rem 0; /* Espaciado interno */
+}
+
+  
+    .welcome-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7); /* Capa negra translucida */
+        z-index: 1;
+    }
+
+/* student comment: 
+  Nos aseguramos que el contenido este por ENCIMA del overlay.
+*/
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/007/931/192/non_2x/incredible-sports-background-in-geometric-style-design-dark-sports-background-illustration-vector.jpg)
+}
+
+/* student comment: 
+  Estilo para las "tarjetas" de deportes.
+  Usamos transparencia para ver el fondo.
+*/
+.sport-card {
+    background-color: rgba(34, 34, 34, 0.8); /* Fondo de tarjeta translucido */
+    border: 1px solid #FFC107; /* Borde amarillo */
+    transition: all 0.3s ease-in-out; /* Efecto suave */
+}
+
+    .sport-card:hover {
+        transform: translateY(-10px); /* Efecto de "levantarse" */
+        box-shadow: 0 10px 20px rgba(255, 193, 7, 0.15); /* Sombra amarilla */
+    }
+
+    .sport-card .card-title {
+        color: #FFC107; /* Titulo de tarjeta amarillo */
+    }
+
+    .sport-card .card-text {
+        color: #eee; /* Texto de tarjeta mas claro */
+    }
 
 /* Paneles y formularios */
 .card {

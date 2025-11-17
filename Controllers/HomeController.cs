@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using WebDeportivo.Models;
 using WebDeportivo.Models.ViewModels;
+using BCrypt.Net;
 
 namespace webdeportivo.Controllers
 {
     public class HomeController : Controller
     {
         // (Página principal con Noticias)
+        [Authorize]
         public IActionResult Index()
         {
             var noticias = new List<Noticia>
@@ -87,6 +89,47 @@ namespace webdeportivo.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        public IActionResult TestHash()
+        {
+            return View();
+        }
+
+        // POST: /Home/TestHash
+        // student comment: Este metodo solo prueba la CREACION de hash
+        [HttpPost]
+        public IActionResult TestHash(string textToHash)
+        {
+            if (!string.IsNullOrEmpty(textToHash))
+            {
+                ViewBag.HashedText = BCrypt.Net.BCrypt.HashPassword(textToHash);
+            }
+            return View();
+        }
+
+        // POST: /Home/TestVerify
+        // student comment: Este metodo solo prueba la VERIFICACION
+        [HttpPost]
+        public IActionResult TestVerify(string plainText, string hashToVerify)
+        {
+            if (!string.IsNullOrEmpty(plainText) && !string.IsNullOrEmpty(hashToVerify))
+            {
+                try
+                {
+                    // student comment: Aca intentamos verificar
+                    bool isVerified = BCrypt.Net.BCrypt.Verify(plainText, hashToVerify);
+                    ViewBag.VerificationResult = isVerified
+                        ? "¡ÉXITO! La contraseña y el hash coinciden."
+                        : "¡FALLO! La contraseña y el hash NO coinciden.";
+                }
+                catch (Exception ex)
+                {
+                    // student comment: Si el hash es invalido (ej: texto plano), esto da error
+                    ViewBag.VerificationResult = $"ERROR: {ex.Message}. (Probablemente el hash no es válido)";
+                }
+            }
+            return View("TestHash"); // Volvemos a la misma vista
         }
     }
 }

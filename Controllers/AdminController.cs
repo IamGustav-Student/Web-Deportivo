@@ -22,5 +22,22 @@ namespace WebDeportivo.Controllers
             //{esta vista tambien esta protegida
             return View();
         }
+
+        public IActionResult CrearDeporte()
+        {
+            return View();
+        }
+
+        public IActionResult EditarDeporte()
+        {
+            return View();
+        }
+
+        public IActionResult EliminarDeporte()
+        {
+            return View();
+        }
+
+
     }
 }

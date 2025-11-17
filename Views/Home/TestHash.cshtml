@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Test de Hashing (BCrypt)";
+}
+
+<h1 class="text-warning">@ViewData["Title"]</h1>
+<p>Esta página prueba si la librería BCrypt está funcionando correctamente.</p>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h3 class="text-warning">Paso 1: Probar Hashing (Crear)</h3>
+        <form asp-controller="Home" asp-action="TestHash" method="post">
+            <div class="form-group mb-3">
+                <label for="textToHash" class="form-label">Texto a Hashear (ej: 123456):</label>
+                <input name="textToHash" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Generar Hash</button>
+        </form>
+
+        @if (ViewBag.HashedText != null)
+        {
+            <div class="alert alert-success mt-3">
+                <p><strong>Hash Generado:</strong></p>
+                <textarea class="form-control" rows="5" readonly>@ViewBag.HashedText</textarea>
+                <small>Copia este hash para el Paso 2.</small>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-6">
+        <h3 class="text-warning">Paso 2: Probar Verificación</h3>
+        <form asp-controller="Home" asp-action="TestVerify" method="post">
+            <div class="form-group mb-3">
+                <label for="plainText" class="form-label">Texto Plano (ej: 123456):</label>
+                <input name="plainText" class="form-control" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="hashToVerify" class="form-label">Hash (Copia el de la izquierda o el de tu BD):</label>
+                <textarea name="hashToVerify" class="form-control" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Verificar</button>
+        </form>
+
+        @if (ViewBag.VerificationResult != null)
+        {
+            <div class="alert alert-info mt-3">
+                <p><strong>Resultado de la Verificación:</strong></p>
+                <p>@ViewBag.VerificationResult</p>
+            </div>
+        }
+    </div>
+</div>

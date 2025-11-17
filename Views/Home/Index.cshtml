@@ -1,8 +1,67 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bienvenido";
 }
 
-<div class="text-center">
-    <h1 class="display-4 text-warning">Bienvenido a WebDeportivo</h1>
-    <p>La mejor plataforma (en construcción) del mundo.</p>
+<div class="welcome-background">
+    <div class="container welcome-content">
+
+        <div class="text-center mb-5">
+            <h1 class="display-3 text-warning">
+                ¡Hola, @User.Identity.Name!
+            </h1>
+            <p class="lead text-warning">
+                Bienvenido a tu portal deportivo. ¿Qué quieres gestionar hoy?
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-4">
+                <div class="card sport-card h-100">
+                    <img src="https://media.istockphoto.com/id/1551911414/es/foto/cancha-de-baloncesto-vac%C3%ADa-en-ilustraci%C3%B3n-3d.jpg?s=612x612&w=0&k=20&c=72EqSl_hLXCWEW-CscSXzqxuz8NEQxzKrOs8EL-xeS4=" class="card-img-top"
+                         alt="Basket"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Basket</h4>
+                        <p class="card-text">
+                            Gestiona equipos, jugadores y estadísticas del torneo.
+                        </p>
+                        <a href="#" class="btn btn-primary">Ir a Basket</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card sport-card h-100">
+                    <img src="https://us.123rf.com/450wm/naratrip/naratrip2404/naratrip240400473/228512561-volleyball-ball-placed-on-the-volleyball-court-floor-dark-tone.jpg" class="card-img-top"
+                         alt="Voley"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Voley</h4>
+                        <p class="card-text">
+                            Administra los próximos partidos y tablas de posiciones.
+                        </p>
+                        <a href="#" class="btn btn-primary">Ir a Voley</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card sport-card h-100">
+                    <img src="https://img.freepik.com/foto-gratis/acercamiento-hermosa-mujer-agua-piscina-mascara-natacion_72229-869.jpg?semt=ais_hybrid&w=740&q=80" class="card-img-top"
+                         alt="Natación"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Natación</h4>
+                        <p class="card-text">
+                            Revisa los tiempos, eventos y perfiles de nadadores.
+                        </p>
+                        <a href="#" class="btn btn-primary">Ir a Natación</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+

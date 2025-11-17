@@ -31,7 +31,8 @@ namespace WebDeportivo.Models
 
         public bool UsActivo { get; set; } // Campo nuevo (para banear o inactivar)
 
-        // --- La Relación con Rol ---
+        public string? UsPasswordResetToken { get; set; }
+        public DateTime? UsPasswordResetTokenExpires { get; set; }
 
         [Display(Name = "Rol")]
         public int RoId { get; set; } // La clave foránea

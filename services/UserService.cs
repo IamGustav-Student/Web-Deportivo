@@ -1,6 +1,4 @@
-﻿// Carpeta: Services
-// Archivo: UserService.cs
-
+﻿
 using WebDeportivo.Models;
 using WebDeportivo.Data;
 using WebDeportivo.Interfaces;

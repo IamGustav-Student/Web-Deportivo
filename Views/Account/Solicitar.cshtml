@@ -1,7 +1,7 @@
 ﻿@using WebDeportivo.ViewModels
 @model RecoveryViewModel
 @{
-    ViewData["Title"] = "Recuperar Contraseña";
+    ViewData["Title"] = "Solicitar Recuperación";
 }
 
 <div class="row justify-content-center">
@@ -9,26 +9,34 @@
         <div class="card shadow-lg">
             <div class="card-body p-5">
                 <h2 class="card-title text-center text-warning mb-4">@ViewData["Title"]</h2>
-                <p>Ingresa tu email y te enviaremos una contraseña temporal.</p>
+                <p>Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña.</p>
 
                 @if (ViewBag.Mensaje != null)
                 {
                     <div class="alert alert-success">@ViewBag.Mensaje</div>
                 }
+                @if (ViewBag.MensajeError != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.MensajeError</div>
+                }
 
-                <form asp-action="Recuperar" method="post">
+                <form asp-action="Solicitar" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-floating mb-3">
-                        <input asp-for="Email" class="form-control"  />
+                        <input asp-for="Email" class="form-control" placeholder="email@ejemplo.com" />
                         <label asp-for="Email" class="form-label"></label>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">Recuperar</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Enviar Enlace</button>
                     </div>
                 </form>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Login">Volver al Login</a>
+                </div>
             </div>
         </div>
     </div>

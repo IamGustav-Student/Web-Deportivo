@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Crear Nuevo Deporte";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <h2 class="card-title text-center text-warning mb-4">@ViewData["Title"]</h2>
+
+                <form asp-action="CrearDeporte" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group mb-3">
+                        <label for="Nombre" class="form-label">Nombre del Deporte</label>
+                        <input name="Nombre" class="form-control" placeholder="Ej: Futbol" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="Descripcion" class="form-label">Descripción Corta (para la tarjeta)</label>
+                        <textarea name="Descripcion" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="UrlImagen" class="form-label">URL de la Imagen (para la tarjeta)</label>
+                        <input name="UrlImagen" class="form-control" placeholder="https://ejemplo.com/imagen.jpg" />
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="EstaActivo" value="true" checked>
+                        <label class="form-check-label" for="EstaActivo">
+                            ¿Activo? (Si se marca, aparece en el Home)
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a asp-action="Index" class="btn btn-secondary me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Crear Deporte</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
